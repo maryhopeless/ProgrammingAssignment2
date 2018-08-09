@@ -19,7 +19,7 @@ makeCacheMatrix <- function(x = matrix()) {
              getinvrs = getinvrs)
 }
 
-## Calculating of inverse matrix
+## Inverse matrix calculating
 
 cacheSolve <- function(x, ...) {
         invrs <- x$getinvrs()
