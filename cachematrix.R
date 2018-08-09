@@ -1,15 +1,35 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Caching the Inverse of a Matrix
 
-## Write a short comment describing this function
+require(MASS) 
+
+## Cache vector calculating
 
 makeCacheMatrix <- function(x = matrix()) {
-
+        
+        invrs <- NULL
+        set <- function(y) {
+                x <<- y
+                invrs <<- NULL
+        }
+        get <- function() x
+        setinvrs <- function(ginv) invrs <<- ginv
+        getinvrs <- function() invrs
+        list(set = set, get = get,
+             setinvrs = setinvrs,
+             getinvrs = getinvrs)
 }
 
-
-## Write a short comment describing this function
+## Calculating of inverse matrix
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+        invrs <- x$getinvrs()
+        if(!is.null(invrs)) {
+                message("getting cached data")
+                return(invrs)
+        }
+        data <- x$get()
+        invrs <- ginv(data, ...)
+        x$setinvrs(invrs)
+        zapsmall(invrs)
+        
 }
